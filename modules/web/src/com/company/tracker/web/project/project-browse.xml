@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd" caption="msg://browseCaption"
+        class="com.company.tracker.web.project.ProjectBrowse" focusComponent="projectsTable"
+        lookupComponent="projectsTable" messagesPack="com.company.tracker.web.project">
+    <dsContext>
+        <groupDatasource id="projectsDs" class="com.company.tracker.entity.Project" view="_local">
+            <query>
+                <![CDATA[select e from tracker$Project e order by e.shortName]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <layout expand="projectsTable" spacing="true">
+        <filter id="filter" applyTo="projectsTable" datasource="projectsDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="projectsTable" width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="shortName"/>
+                <column id="name"/>
+            </columns>
+            <rows datasource="projectsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel" alwaysVisible="true">
+                <button id="createBtn" action="projectsTable.create"/>
+                <button id="editBtn" action="projectsTable.edit"/>
+                <button id="removeBtn" action="projectsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

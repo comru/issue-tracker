@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd" caption="msg://editCaption"
+        class="com.company.tracker.web.issue.IssueEdit" datasource="issueDs" focusComponent="fieldGroup"
+        messagesPack="com.company.tracker.web.issue">
+    <dsContext>
+        <datasource id="issueDs" class="com.company.tracker.entity.Issue" view="issue-edit-view"/>
+        <runtimePropsDatasource id="runtimePropsDs" mainDs="issueDs"/>
+        <collectionDatasource id="categoriesDs" class="com.haulmont.cuba.core.entity.Category" view="_local">
+            <query>
+                <![CDATA[select c from sys$Category c where c.entityType='tracker$Issue']]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="projectsDs" class="com.company.tracker.entity.Project" view="project-edit-view">
+            <query>
+                <![CDATA[select p from tracker$Project p order by p.shortName]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="usersDs" class="com.haulmont.cuba.security.entity.User" view="_minimal">
+            <query>
+                <![CDATA[select u from sec$User u order by u.login]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout expand="contentLayout" spacing="true">
+        <split id="contentLayout" orientation="horizontal" width="100%" pos="70">
+            <vbox id="descriptionBox" height="100%" margin="false,true,false,false" spacing="true">
+                <label id="descriptionLab" htmlEnabled="true" width="100%"/>
+                <textField id="summaryField" datasource="issueDs" property="summary" required="true"
+                               width="100%" inputPrompt="msg://com.company.tracker.entity/Issue.summary"/>
+                <richTextArea id="descriptionField" datasource="issueDs" property="description" width="100%"/>
+            </vbox>
+            <vbox margin="false,false,false,true" spacing="true">
+                <fieldGroup id="fieldGroup" datasource="issueDs" width="100%">
+                    <column width="100%">
+                        <field id="project" optionsDatasource="projectsDs" width="100%"/>
+                        <field id="assignee" optionsDatasource="usersDs" width="100%"/>
+                    </column>
+                </fieldGroup>
+                <runtimeProperties id="runtimePropertiesFrame" categoriesDs="categoriesDs" runtimeDs="runtimePropsDs"/>
+            </vbox>
+        </split>
+        <hbox spacing="true">
+            <frame id="windowActions" screen="editWindowActions"/>
+            <button id="toggleViewEditDescrBtn" invoke="editDescription" caption="msg://editDescription"/>
+        </hbox>
+
+    </layout>
+</window>

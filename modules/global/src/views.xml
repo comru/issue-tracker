@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+    <view class="com.company.tracker.entity.Project"
+          extends="_local"
+          name="project-edit-view">
+        <property name="category"
+                  view="_minimal"/>
+        <property name="team"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.tracker.entity.Issue"
+          extends="_local"
+          name="issue-edit-view">
+        <property name="project"
+                  view="project-edit-view"/>
+        <property name="assignee"
+                  view="_minimal"/>
+        <property name="created"
+                  view="_minimal"/>
+        <property name="category" view="_minimal"/>
+    </view>
+    <view class="com.company.tracker.entity.Issue"
+          extends="_local"
+          name="issue-browse-view" systemProperties="true">
+        <property name="project"
+                  view="project-edit-view"/>
+        <property name="assignee"
+                  view="_minimal"/>
+        <property name="created"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.tracker.entity.Issue"
+          name="issue-with-project-id">
+        <property name="project">
+            <property name="id"/>
+        </property>
+    </view>
+</views>

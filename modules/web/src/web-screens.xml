@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
+    <include file="/screens.xml"/>
+    <screen id="tracker$Project.browse" template="com/company/tracker/web/project/project-browse.xml"/>
+    <screen id="tracker$Project.edit" template="com/company/tracker/web/project/project-edit.xml"/>
+    <screen id="tracker$Issue.browse" template="com/company/tracker/web/issue/issue-browse.xml"/>
+    <screen id="tracker$Issue.edit" template="com/company/tracker/web/issue/issue-edit.xml"/>
+    <screen id="sec$User.lookup" template="com/company/tracker/web/user/ext-user-lookup.xml"/>
+</screen-config>

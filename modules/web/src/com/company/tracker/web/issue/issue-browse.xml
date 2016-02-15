@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd" caption="msg://browseCaption"
+        class="com.company.tracker.web.issue.IssueBrowse" focusComponent="issuesTable" lookupComponent="issuesTable"
+        messagesPack="com.company.tracker.web.issue">
+    <dsContext>
+        <collectionDatasource id="issuesDs" class="com.company.tracker.entity.Issue" view="issue-browse-view"
+                              loadDynamicAttributes="true">
+            <query>
+                <![CDATA[select e from tracker$Issue e order by e.project, e.number]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout expand="issuesTable" spacing="true">
+        <filter id="filter" applyTo="issuesTable" datasource="issuesDs">
+            <properties include=".*"/>
+        </filter>
+        <table id="issuesTable" width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="description"/>
+            </columns>
+            <rows datasource="issuesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel" alwaysVisible="true">
+                <button id="createBtn" action="issuesTable.create"/>
+                <button id="editBtn" action="issuesTable.edit"/>
+                <button id="removeBtn" action="issuesTable.remove"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd" caption="msg://editCaption"
+        class="com.company.tracker.web.project.ProjectEdit" datasource="projectDs" focusComponent="fieldGroup"
+        messagesPack="com.company.tracker.web.project">
+    <dsContext>
+        <datasource id="projectDs" class="com.company.tracker.entity.Project" view="project-edit-view">
+            <collectionDatasource id="teamDs" property="team"/>
+        </datasource>
+        <collectionDatasource id="categoriesDs" class="com.haulmont.cuba.core.entity.Category" view="_local">
+            <query>
+                <![CDATA[select c from sys$Category c where c.entityType='tracker$Issue']]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout expand="teamBox" spacing="true">
+        <fieldGroup id="fieldGroup" datasource="projectDs">
+            <column width="250px">
+                <field id="shortName"/>
+                <field id="name"/>
+                <field id="category" optionsDatasource="categoriesDs"/>
+            </column>
+        </fieldGroup>
+        <groupBox id="teamBox" caption="msg://com.company.tracker.entity/Project.team">
+            <table id="teamTable" height="100%" width="100%">
+                <actions>
+                    <action id="add" openType="DIALOG"/>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                    <column id="login"/>
+                    <column id="name"/>
+                </columns>
+                <rows datasource="teamDs"/>
+                <buttonsPanel>
+                    <button action="teamTable.add"/>
+                    <button action="teamTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <frame id="windowActions" screen="editWindowActions"/>
+    </layout>
+</window>
